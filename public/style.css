@@ -1,0 +1,171 @@
+body, html {
+  margin: 0;
+  padding: 0;
+  font-family: 'JetBrains Mono', monospace;
+  color: #eee;
+  background-color: #000;
+  height: 100%;
+}
+
+.background {
+  background-image: url("background.jpg");
+  background-size: cover;
+  background-position: center;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: rgba(20, 0, 0, 0.85);
+  padding: 10px 20px;
+  font-size: 14px;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.brand-name {
+  font-size: 30px;
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-family: 'Orbitron', sans-serif;
+}
+
+.logo {
+  height: 32px;
+}
+
+.user-block {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.welcome {
+  font-size: 14px;
+  color: #ffcccc;
+}
+
+.logout {
+  background: #600;
+  color: white;
+  border: none;
+  padding: 6px 12px;
+  font-size: 13px;
+  cursor: pointer;
+  font-family: 'JetBrains Mono', monospace;
+}
+
+.chat-window {
+  flex: 1;
+  display: flex;
+}
+
+.sidebar {
+  width: 220px;
+  background-color: rgba(30, 0, 0, 0.9);
+  padding: 15px;
+}
+
+.search {
+  width: 100%;
+  padding: 8px;
+  background: #111;
+  border: none;
+  color: white;
+  margin-bottom: 15px;
+}
+
+.chat-item {
+  padding: 10px;
+  background-color: #300;
+  margin-bottom: 10px;
+  border-radius: 6px;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.last-msg {
+  font-size: 12px;
+  color: #aaa;
+}
+
+.chat {
+  flex: 1;
+  background-color: rgba(32, 0, 0, 0.3);
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+  position: relative;
+  margin-right: 220px;
+}
+
+.chat-header {
+  font-weight: bold;
+  margin-bottom: 15px;
+  font-size: 16px;
+}
+
+.online {
+  color: #4af74a;
+  font-size: 13px;
+}
+
+.offline {
+  color: #999;
+  font-size: 13px;
+}
+
+.messages {
+  flex: 1;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.msg {
+  background-color: rgba(255, 70, 70, 0.15);
+  padding: 10px 14px;
+  border-radius: 6px;
+  max-width: 80%;
+  width: fit-content;
+  font-size: 15px;
+  color: #f0dcdc;
+  backdrop-filter: blur(2px);
+}
+
+.msg.my {
+  color: #ff6666;
+  font-weight: bold;
+  align-self: flex-end;
+}
+
+.input-area {
+  display: flex;
+  margin-top: 10px;
+}
+
+.input-area input {
+  flex: 1;
+  padding: 10px;
+  border: none;
+  background: #111;
+  color: #fff;
+}
+
+.input-area button {
+  padding: 10px;
+  border: none;
+  background: #900;
+  color: white;
+  cursor: pointer;
+}
