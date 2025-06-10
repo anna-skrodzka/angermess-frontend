@@ -2,7 +2,7 @@ import { useState, useCallback } from 'react'
 import Header from './components/Header'
 import MessageList from './components/MessageList'
 import MessageInput from './components/MessageInput'
-import Sidebar from './components/Sidebar'
+import Sidebar from './components/sidebar/Sidebar'
 import { useWebSocket } from './hooks/useWebSocket'
 
 function App() {
