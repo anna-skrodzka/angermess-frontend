@@ -19,12 +19,19 @@ export default function MessageList({ messages }) {
 
         return (
           <div key={idx} className="msg">
-            {parsed.text}
             {parsed.timestamp && (
-              <div style={{ fontSize: '10px', color: '#aaa' }}>
-                {new Date(parsed.timestamp).toLocaleTimeString()}
+              <div
+                style={{
+                  fontSize: '9px',
+                  color: 'rgba(170, 170, 170, 0.5)',
+                  textAlign: 'right',
+                  marginTop: '4px',
+                }}
+              >
+                {new Date(parsed.timestamp).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', hour12: false })}
               </div>
             )}
+            {parsed.text}
           </div>
         )
       })}
