@@ -1,8 +1,7 @@
 import { useState, useCallback } from 'react'
-import Header from './components/Header'
-import MessageList from './components/MessageList'
-import MessageInput from './components/MessageInput'
+import Header from './components/header/Header'
 import Sidebar from './components/sidebar/Sidebar'
+import Chat from './components/chat/Chat'
 import { useWebSocket } from './hooks/useWebSocket'
 
 function App() {
@@ -31,18 +30,13 @@ function App() {
 
       <main className="chat-window">
         <Sidebar />
-
-        <section className="chat">
-          <div className="chat-header">
-            common room
-            <span className={isConnected ? 'online' : 'offline'}>
-              {isConnected ? ' online' : ' offline'}
-            </span>
-          </div>
-
-          <MessageList messages={messages} />
-          <MessageInput input={input} setInput={setInput} onSend={sendMessage} />
-        </section>
+        <Chat
+          messages={messages}
+          input={input}
+          setInput={setInput}
+          sendMessage={sendMessage}
+          isConnected={isConnected}
+        />
       </main>
     </div>
   )
