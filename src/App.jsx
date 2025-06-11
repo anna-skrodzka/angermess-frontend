@@ -7,12 +7,18 @@ import { useWebSocket } from './hooks/useWebSocket'
 function App() {
   const [messages, setMessages] = useState([])
   const [input, setInput] = useState('')
+  const [currentRoom, setCurrentRoom] = useState('general')
 
   const appendMessage = useCallback((msg) => {
     setMessages(prev => [...prev, msg])
   }, [])
 
-  const { socketRef, isConnected } = useWebSocket(appendMessage)
+  const handleRoomChange = (room) => {
+    setCurrentRoom(room)
+    setMessages([])
+  }
+
+  const { socketRef, isConnected } = useWebSocket(currentRoom, appendMessage)
 
   const sendMessage = (text) => {
     if (socketRef.current?.readyState === WebSocket.OPEN) {
@@ -27,9 +33,8 @@ function App() {
   return (
     <div className="background">
       <Header />
-
       <main className="chat-window">
-        <Sidebar />
+        <Sidebar onSelectRoom={handleRoomChange} />
         <Chat
           messages={messages}
           input={input}
