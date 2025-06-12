@@ -1,11 +1,24 @@
 import MessageList from './MessageList'
 import MessageInput from './MessageInput'
+import { useWebSocket } from '../../hooks/useWebSocket'
 
-function Chat({ messages, input, setInput, sendMessage, isConnected }) {
+function Chat({ messages, input, setInput, currentRoom, appendMessage }) {
+  const { socketRef, isConnected } = useWebSocket(currentRoom, appendMessage)
+
+  const sendMessage = (text) => {
+    if (socketRef.current?.readyState === WebSocket.OPEN) {
+      const message = JSON.stringify({
+        text,
+        timestamp: new Date().toISOString()
+      })
+      socketRef.current.send(message)
+    }
+  }
+
   return (
     <section className="chat">
       <div className="chat-header">
-        common room
+        {currentRoom}
         <span className={isConnected ? 'online' : 'offline'}>
           {isConnected ? ' online' : ' offline'}
         </span>

@@ -253,6 +253,23 @@ header {
   color: #fff;
 }
 
+.auth-error {
+  background: rgba(140, 0, 0, 0.2);
+  border: 1px solid #c00;
+  color: #ff6666;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 13px;
+  padding: 8px 12px;
+  border-radius: 6px;
+  text-align: center;
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-5px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
 .input-area input {
   flex: 1;
   padding: 10px;

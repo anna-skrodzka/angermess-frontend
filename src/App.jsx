@@ -1,15 +1,15 @@
-import { useState, useCallback } from 'react'
+import { useState, useCallback, useEffect } from 'react'
 import Header from './components/header/Header'
 import Sidebar from './components/sidebar/Sidebar'
 import Chat from './components/chat/Chat'
 import AuthGate from './components/auth/AuthGate'
-import { useWebSocket } from './hooks/useWebSocket'
 
 function App() {
   const [authenticated, setAuthenticated] = useState(false)
   const [messages, setMessages] = useState([])
   const [input, setInput] = useState('')
   const [currentRoom, setCurrentRoom] = useState('general')
+  const [nickname, setNickname] = useState('')
 
   const appendMessage = useCallback((msg) => {
     setMessages(prev => [...prev, msg])
@@ -20,23 +20,40 @@ function App() {
     setMessages([])
   }
 
-  const { socketRef, isConnected } = useWebSocket(currentRoom, appendMessage)
-
-  const sendMessage = (text) => {
-    if (socketRef.current?.readyState === WebSocket.OPEN) {
-      const message = JSON.stringify({
-        text,
-        timestamp: new Date().toISOString()
+  const fetchMe = (token) => {
+    return fetch('/auth/me', {
+      headers: { Authorization: `Bearer ${token}` }
+    })
+      .then(res => {
+        if (!res.ok) throw new Error('unauthorized')
+        return res.json()
       })
-      socketRef.current.send(message)
-    }
+      .then(data => {
+        setAuthenticated(true)
+        setNickname(data.nickname)
+      })
+      .catch(() => {
+        localStorage.removeItem('token')
+      })
   }
+
+  useEffect(() => {
+    const token = localStorage.getItem('token')
+    if (token) {
+      fetchMe(token)
+    }
+  }, [])
 
   return (
     <div className="background">
       <Header
         authenticated={authenticated}
-        onLogout={() => setAuthenticated(false)}
+        nickname={nickname}
+        onLogout={() => {
+          localStorage.removeItem('token')
+          setAuthenticated(false)
+          setNickname('')
+        }}
       />
       {authenticated ? (
         <main className="chat-window">
@@ -45,12 +62,15 @@ function App() {
             messages={messages}
             input={input}
             setInput={setInput}
-            sendMessage={sendMessage}
-            isConnected={isConnected}
+            currentRoom={currentRoom}
+            appendMessage={appendMessage}
           />
         </main>
       ) : (
-        <AuthGate onAuthSuccess={() => setAuthenticated(true)} />
+        <AuthGate onAuthSuccess={(token) => {
+          localStorage.setItem('token', token)
+          fetchMe(token)
+        }} />
       )}
     </div>
   )
