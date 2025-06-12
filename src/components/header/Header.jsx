@@ -1,4 +1,4 @@
-export default function Header({ authenticated, onLogout }) {
+export default function Header({ authenticated, nickname, onLogout }) {
   return (
     <header>
       <div className="brand">
@@ -8,7 +8,7 @@ export default function Header({ authenticated, onLogout }) {
 
       {authenticated && (
         <div className="user-block">
-          <span className="welcome">[anonymous]</span>
+          <span className="welcome">[{nickname || 'anonymous'}]</span>
           <button className="logout" onClick={onLogout}>
             Log out
           </button>
