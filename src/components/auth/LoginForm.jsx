@@ -11,6 +11,15 @@ export default function LoginForm({ onSwitch, onLogin }) {
   }
 
   const handleLogin = async () => {
+    if (!nickname.trim()) {
+      setError("No name, no entry")
+      return
+    }
+    if (!password.trim()) {
+      setError("No passphrase. No access.")
+      return
+    }
+
     try {
       const res = await fetch('/auth/login', {
         method: 'POST',
