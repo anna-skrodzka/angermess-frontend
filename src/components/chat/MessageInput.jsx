@@ -1,4 +1,8 @@
-export default function MessageInput({ input, setInput, onSend }) {
+import { useState } from 'react'
+
+export default function MessageInput({ onSend }) {
+  const [input, setInput] = useState('')
+
   const send = () => {
     const trimmed = input.trim()
     if (trimmed) onSend(trimmed)
