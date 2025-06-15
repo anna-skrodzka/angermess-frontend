@@ -18,6 +18,7 @@ function App() {
       .then(data => {
         setAuthenticated(true)
         setNickname(data.nickname)
+        localStorage.setItem("userId", data._id)
       })
       .catch(() => {
         localStorage.removeItem('token')

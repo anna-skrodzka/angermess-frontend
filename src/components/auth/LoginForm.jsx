@@ -33,8 +33,9 @@ export default function LoginForm({ onSwitch, onLogin }) {
         return
       }
 
-      const { token } = await res.json()
+      const { token, userId } = await res.json()
       localStorage.setItem('token', token)
+      localStorage.setItem('userId', userId)
       onLogin(token)
     } catch (e) {
       setError('Server unavailable')
