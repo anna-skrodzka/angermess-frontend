@@ -21,14 +21,24 @@ export default function MessageList({ messages }) {
           parsed = { text: msg }
         }
 
+        const isSystem = parsed.author?.nickname === 'system'
         const isMyMessage = parsed.author?.id === myId
+
+        if (isSystem) {
+          return (
+            <div key={idx} className="msg system">
+              {parsed.text}
+            </div>
+          )
+        }
+
         const messageClass = isMyMessage ? 'msg my' : 'msg'
         const authorName = parsed.author?.nickname || 'Unknown'
 
         return (
           <div key={idx} className={messageClass}>
             {!isMyMessage && (
-              <div className="msg-author other">
+              <div className="msg-author">
                 {authorName}
               </div>
             )}

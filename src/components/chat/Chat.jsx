@@ -3,8 +3,9 @@ import Sidebar from '../sidebar/Sidebar'
 import MessageList from './MessageList'
 import MessageInput from './MessageInput'
 import { useWebSocket } from '../../hooks/useWebSocket'
+import ChatHeader from './ChatHeader'
 
-function Chat({ input, setInput }) {
+function Chat() {
   const [currentRoom, setCurrentRoom] = useState('general')
   const [messages, setMessages] = useState([])
   const appendMessage = useCallback((msg) => {
@@ -31,13 +32,7 @@ function Chat({ input, setInput }) {
     <main className="chat-window">
       <Sidebar onSelectRoom={handleRoomChange} />
       <section className="chat">
-        <div className="chat-header">
-          {currentRoom}
-          <span className={isConnected ? 'online' : 'offline'}>
-            {isConnected ? ' online' : ' offline'}
-          </span>
-        </div>
-
+        <ChatHeader roomName={currentRoom} isConnected={isConnected} />
         <MessageList messages={messages} />
         <MessageInput onSend={sendMessage} />
       </section>
