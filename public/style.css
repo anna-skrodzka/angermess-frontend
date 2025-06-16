@@ -11,7 +11,7 @@ body, html {
   background-image: url("background.jpg");
   background-size: cover;
   background-position: center;
-  min-height: 100vh;
+  height: 100vh;
   display: flex;
   flex-direction: column;
 }
@@ -69,12 +69,30 @@ header {
   flex: 1;
   display: flex;
   height: 100vh;
+  overflow: hidden;
 }
 
 .sidebar {
   width: 220px;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
   background-color: rgba(30, 0, 0, 0.9);
+  overflow: hidden;
+}
+
+.sidebar-room-list {
+  flex: 1;
+  overflow-y: auto;
   padding: 15px;
+  box-sizing: border-box;
+}
+
+.sidebar-footer {
+  padding: 10px;
+  border-top: 1px solid #500;
+  background-color: rgba(20, 0, 0, 0.8);
+  box-sizing: border-box;
 }
 
 .chat-item {
@@ -84,6 +102,33 @@ header {
   border-radius: 6px;
   font-size: 14px;
   cursor: pointer;
+}
+
+.create-room {
+  background-color: #200;
+  opacity: 0.7;
+  transition: background-color 0.2s, opacity 0.2s;
+  margin-top: auto;
+}
+
+.create-room:hover {
+  background-color: #400;
+  opacity: 1;
+}
+
+.create-room-placeholder {
+  color: #ffccaa;
+  font-style: italic;
+}
+
+.create-room-input {
+  width: 100%;
+  padding: 5px;
+  font-size: 14px;
+  background-color: #100;
+  border: 1px solid #ffccaa;
+  color: #eee;
+  border-radius: 4px;
 }
 
 .search {
@@ -93,15 +138,6 @@ header {
   border: none;
   color: white;
   margin-bottom: 15px;
-}
-
-.chat-item {
-  padding: 10px;
-  background-color: #300;
-  margin-bottom: 10px;
-  border-radius: 6px;
-  font-size: 14px;
-  cursor: pointer;
 }
 
 .last-msg {
@@ -163,6 +199,18 @@ header {
   font-weight: bold;
   align-self: flex-end;
   align-items: flex-end;
+}
+
+.msg.system {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 12px;
+  color: #cc4444;
+  background: none;
+  padding: 2px 0;
+  margin: 10px 0;
+  align-self: center;
+  text-align: center;
+  white-space: pre-wrap;
 }
 
 .msg-author {
