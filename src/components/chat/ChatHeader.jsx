@@ -1,6 +1,7 @@
 import { useState, useRef, useEffect } from 'react'
 
 function ChatHeader({ roomName, isConnected, onDeleteRoom }) {
+  const [showConfirm, setShowConfirm] = useState(false)
   const [showMenu, setShowMenu] = useState(false)
   const menuRef = useRef(null)
 
@@ -34,7 +35,19 @@ function ChatHeader({ roomName, isConnected, onDeleteRoom }) {
 
         {showMenu && (
           <div className="settings-menu">
-            <button onClick={onDeleteRoom}><img src="/trash.png" className="trash-icon" /> Delete room</button>
+            {!showConfirm ? (
+              <button onClick={() => setShowConfirm(true)}>
+                <img src="/trash.png" className="trash-icon" /> Delete room
+              </button>
+            ) : (
+              <div className="confirm-box">
+                <div className="confirm-text">Are you absolutely sure?</div>
+                <div className="confirm-actions">
+                  <button className="confirm-yes" onClick={onDeleteRoom}>Yes</button>
+                  <button className="confirm-no" onClick={() => setShowConfirm(false)}>No</button>
+                </div>
+              </div>
+            )}
           </div>
         )}
       </div>

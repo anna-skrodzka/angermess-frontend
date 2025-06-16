@@ -10,6 +10,10 @@ function SidebarRoomList({ onSelectRoom }) {
       .catch(err => console.error('Failed to fetch rooms', err))
   }, [])
 
+  function truncate(text, maxLength = 40) {
+    return text.length > maxLength ? text.slice(0, maxLength) + '…' : text
+  }
+
   return (
     <>
       {rooms.map((room, idx) => (
@@ -19,8 +23,13 @@ function SidebarRoomList({ onSelectRoom }) {
           onClick={() => onSelectRoom(room.name)}
           style={{ cursor: 'pointer' }}
         >
-          {room.name}<br />
-          <span className="last-msg">{room.last}</span>
+          <div className="room-name">{room.name}</div>
+          <div className="last-msg">
+            {room.author && room.author !== 'system' && (
+              <span className="author">{room.author}: </span>
+            )}
+            <span className="text">{truncate(room.last)}</span>
+          </div>
         </div>
       ))}
     </>

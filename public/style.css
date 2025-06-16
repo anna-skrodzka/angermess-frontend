@@ -73,7 +73,7 @@ header {
 }
 
 .sidebar {
-  width: 220px;
+  width: 260px;
   display: flex;
   flex-direction: column;
   height: 100%;
@@ -141,8 +141,14 @@ header {
 }
 
 .last-msg {
-  font-size: 12px;
+  font-size: 13px;
   color: #aaa;
+  margin-top: 2px;
+}
+
+.author {
+  font-weight: bold;
+  color: #999;
 }
 
 .chat {
@@ -200,34 +206,60 @@ header {
 
 .settings-menu {
   position: absolute;
-  right: 0;
   top: 100%;
+  right: 0;
   background-color: #200;
   border: 1px solid #500;
+  padding: 10px;
+  border-radius: 6px;
   z-index: 100;
-  margin-top: 2px;
-  padding: 4px 0;
-  min-width: 120px;
-  box-shadow: 0 0 4px #000;
 }
 
 .settings-menu button {
-  display: block;
-  width: 100%;
-  white-space: nowrap;
-  padding: 6px 12px;
   background: none;
+  white-space: nowrap;
+  color: #eee;
   border: none;
-  color: #faa;
-  font-family: 'JetBrains Mono', monospace;
-  text-align: left;
-  font-size: 13px;
   cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 6px;
 }
 
 .settings-menu button:hover {
   background-color: #400;
   color: #fff;
+}
+
+.confirm-box {
+  color: #f88;
+  font-size: 13px;
+}
+
+.confirm-text {
+  white-space: nowrap;
+  margin-bottom: 6px;
+  font-weight: bold;
+  color: #faa;
+}
+
+.confirm-actions {
+  display: flex;
+  gap: 6px;
+}
+
+.confirm-actions button {
+  padding: 3px 8px;
+  background: #400;
+  border: none;
+  color: #eee;
+  border-radius: 4px;
+  font-size: 12px;
+  cursor: pointer;
+}
+
+.confirm-actions button.confirm-no {
+  background: #222;
 }
 
 .online {

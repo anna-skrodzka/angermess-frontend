@@ -21,7 +21,7 @@ export default function MessageList({ messages }) {
           parsed = { text: msg }
         }
 
-        const isSystem = parsed.author === 'system'
+        const isSystem = parsed.author?.nickname === 'system'
         const isMyMessage = parsed.author?.id === myId
 
         if (isSystem) {
