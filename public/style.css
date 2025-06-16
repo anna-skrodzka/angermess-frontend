@@ -150,15 +150,84 @@ header {
   background-color: rgba(32, 0, 0, 0.3);
   display: flex;
   flex-direction: column;
-  padding: 20px;
   position: relative;
   margin-right: 220px;
 }
 
 .chat-header {
-  font-weight: bold;
-  margin-bottom: 15px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 14px;
   font-size: 16px;
+  background-color: rgba(0, 0, 0, 0.4);
+  border-bottom: 1px solid #400;
+  color: #eee;
+}
+
+.chat-header-left {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+.settings-button {
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+.settings-icon {
+  width: 22px;
+  height: 22px;
+  opacity: 0.7;
+  transition: opacity 0.2s;
+}
+
+.settings-icon:hover {
+  opacity: 1;
+}
+
+.trash-icon {
+  width: 12px;
+  height: 12px;
+  opacity: 0.8;
+}
+
+.settings-wrapper {
+  position: relative;
+}
+
+.settings-menu {
+  position: absolute;
+  right: 0;
+  top: 100%;
+  background-color: #200;
+  border: 1px solid #500;
+  z-index: 100;
+  margin-top: 2px;
+  padding: 4px 0;
+  min-width: 120px;
+  box-shadow: 0 0 4px #000;
+}
+
+.settings-menu button {
+  display: block;
+  width: 100%;
+  white-space: nowrap;
+  padding: 6px 12px;
+  background: none;
+  border: none;
+  color: #faa;
+  font-family: 'JetBrains Mono', monospace;
+  text-align: left;
+  font-size: 13px;
+  cursor: pointer;
+}
+
+.settings-menu button:hover {
+  background-color: #400;
+  color: #fff;
 }
 
 .online {
@@ -176,6 +245,7 @@ header {
   overflow-y: auto;
   display: flex;
   flex-direction: column;
+  padding: 20px;
   gap: 8px;
   max-height: calc(100vh - 180px);
 }
@@ -238,6 +308,7 @@ header {
 .input-area {
   display: flex;
   margin-top: 10px;
+  padding-bottom: 20px;
 }
 
 .auth-container {
