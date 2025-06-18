@@ -2,13 +2,18 @@ import { useEffect, useState } from 'react'
 
 function SidebarRoomList({ onSelectRoom }) {
   const [rooms, setRooms] = useState([])
+  const [query, setQuery] = useState('')
 
   useEffect(() => {
-    fetch('http://localhost:8080/rooms')
+    const endpoint = query.trim()
+      ? `/rooms/search?q=${encodeURIComponent(query)}`
+      : '/rooms'
+
+    fetch(endpoint)
       .then(res => res.json())
       .then(data => setRooms(data))
       .catch(err => console.error('Failed to fetch rooms', err))
-  }, [])
+  }, [query])
 
   function truncate(text, maxLength = 40) {
     return text.length > maxLength ? text.slice(0, maxLength) + '…' : text
@@ -16,6 +21,14 @@ function SidebarRoomList({ onSelectRoom }) {
 
   return (
     <>
+      <input
+        type="text"
+        className="search"
+        placeholder="Search rooms..."
+        value={query}
+        onChange={(e) => setQuery(e.target.value)}
+      />
+
       {rooms.map((room, idx) => (
         <div
           key={idx}
